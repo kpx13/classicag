@@ -29,16 +29,15 @@
                             </table>
                             {% csrf_token %}
                             
-                            
                         </form>
                     </div>
-                    <div class="separator"></div>
-                    <div class="separator"></div>
                 </td>
                 
                 <td valign="top">
                         <div class="c_p_r">
-                            <h2 style='color: red'>{{ message }}<h2>
+                            {% if message %}
+                                <h2 style='color: red'>{{ message }}<h2>
+                            {% endif %}
                             {{ p.content_right }}
                         </div>
                 </td>

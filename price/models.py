@@ -10,7 +10,7 @@ class Category(models.Model):
     class Meta:
         verbose_name = 'категория'
         verbose_name_plural = 'категории'
-        ordering=['order']
+        ordering=['name']
     
     def __unicode__(self):
         return self.name
@@ -30,7 +30,7 @@ class SubCategory(models.Model):
     class Meta:
         verbose_name = 'подкатегория'
         verbose_name_plural = 'подкатегории'
-        ordering=['order']
+        ordering=['name']
     
     def __unicode__(self):
         return self.name
@@ -46,7 +46,7 @@ class Item(models.Model):
     subcategory = models.ForeignKey(SubCategory, verbose_name=u'подкатегория', related_name='item')
     name = models.CharField(max_length=512, verbose_name=u'название')
     unit = models.CharField(max_length=16, verbose_name=u'единица измерения')
-    price = models.FloatField(verbose_name=u'цена')
+    price = models.IntegerField(verbose_name=u'цена')
     
     @staticmethod
     def get(id_):

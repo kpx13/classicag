@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
-{% block title %}Клиенты{% endblock %}
+{% block title %}Цены{% endblock %}
 
 {% block content %}
     <div class="site_navigation" style="height:40px; padding-left:20px;">
         <a href="/">Главная</a>&nbsp;/&nbsp;
-        Клиенты
+        Цены
     </div>
     
     <div id="content_1">
@@ -13,18 +13,39 @@
             <tr>
                 <td valign="top">
                     <div id="center">
-                        <h1> Клиенты компании "Классика-АГ":</h1>
+                        <h1>Прайс лист на клининговые услуги, стоимость клининговых услуг</h1>
                         <div class="separator"></div>
-                        <p>Страница в разработке.</p>
+                        <p>*** <b>Стоимость клининговых услуг</b>&nbsp; зависит от  площади и специфики объекта. Цены на уборку помещений зависят от степени загрязнения, наличия мебели,  от количества необходимых расходных материалов, а также от времени и  сроков исполнения.</p>
+                        <p>**** Выезд специалиста компании для осмотра&nbsp; объекта и расчет стоимости уборки вашей квартиры или других помещений&nbsp; - бесплатно.</p>
+                    
+                    
+                    
+                        {% include 'price_content.html' %}
+                    
+                    
+                        <div class="separator"></div>
+                        <div class="separator"></div>
                     </div>
-                    <div class="separator"></div>
-                    <div class="separator"></div>
                 </td>
                 
                 <td valign="top">
-                        <div class="c_p_r">
-                          
+                    
+                    <div id="price_fixed" style="text-align:center">
+                        <div class="cart" style="font-size:24px; text-align:center; line-height:35px;">
+                            <span class="europe">Стоимость услуг</span><br/>
+                            <font size="+3" ><font color="#45403a" id="summ">0</font></font><br />
+                            <span class="europe">руб.</span>
                         </div>
+                        <div>
+                            <span>&nbsp;</span><br />
+                            
+                            <div class="ord_dropdown" id="prods_to_order" style="display:none; text-align:left"></div>
+                        </div>
+                    
+                        <br />
+                    
+                        <input class="submit_order" id="submit_order" disabled="disabled" type="button" name="submit" value="Оформить заказ" onclick="" />
+                    </div>
                 </td>
             </tr>
         </table>

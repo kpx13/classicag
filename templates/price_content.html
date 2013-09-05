@@ -1,0 +1,15 @@
+<ul>
+{% for cat in categories %}
+    <li>{{ cat.name }}</li>
+    <ul>
+        {% for subcat in cat.sub.all %}
+            <li>{{ subcat.name }}</li>
+            <ul>
+                {% for item in subcat.item.all %}
+                    <li>{{ item.name }} - {{ item.id }} - {{ item.price }}</li>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    </ul>
+{% endfor %}
+</ul>
