@@ -21,10 +21,9 @@ urlpatterns = patterns('',
 
     url(r'^$', views.home),
     url(r'^home/$', views.home),
-    url(r'^services/$', views.services),
-    url(r'^services/(?P<page_name>[\w-]+)/$', views.services),
-    
-    url(r'^feedback/$', views.feedback),
+    url(r'^contacts/$', views.contacts),
+    url(r'^clients/$', views.clients),
+    url(r'^price/$', views.price),
     
     url(r'^(?P<page_name>[\w-]+)/$' , views.page),
 )

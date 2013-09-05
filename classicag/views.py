@@ -8,9 +8,6 @@ from django.template import RequestContext
  
 
 from pages.models import Page
-from services.models import Article
-from slideshow.models import Slider
-
 from feedback.forms import FeedbackForm
 
 
@@ -21,42 +18,44 @@ from livesettings import config_value
 def get_common_context(request):
     c = {}
     c['request_url'] = request.path
-    c['slideshow'] = Slider.objects.all()
     c.update(csrf(request))
     return c
 
 def page(request, page_name):
     c = get_common_context(request)
-    try:
-        c.update(Page.get_by_slug(page_name))
+    p = Page.get_by_slug(page_name)
+    if p.is_service or (page_name == 'cleaning_service'):
+        c.update({'services': Page.get_services_links()})
+    if p:
+        c.update({'p': p})
         return render_to_response('page.html', c, context_instance=RequestContext(request))
-    except:
+    else:
         raise Http404()
 
 def home(request):
     c = get_common_context(request)
-    c.update(Page.get_by_slug('home'))
     c['request_url'] = 'home'
     return render_to_response('home.html', c, context_instance=RequestContext(request))
 
-def services(request, page_name=None):
-    if page_name:
-        c = get_common_context(request)
-        c['a'] = Article.get_by_slug(page_name)
-        c['articles'] = Article.objects.all()
-        c['base_url'] = 'services'
-        c['base_title'] = u'Услуги'
-        return render_to_response('articles_base.html', c, context_instance=RequestContext(request))
-    else:
-        return HttpResponseRedirect('/services/%s/' % Article.objects.all()[0].slug)
-
-def feedback(request):
-    if request.method == 'POST':
+def contacts(request):
+    c = get_common_context(request)
+    c.update({'p': Page.get_by_slug('contacts')})
+    if request.method == 'GET':
+        c.update({'form': FeedbackForm()})
+        return render_to_response('contacts.html', c, context_instance=RequestContext(request))
+    elif request.method == 'POST':
         form = FeedbackForm(request.POST)
         if form.is_valid():
             form.save()
+            c.update({'message': u'Ваша заявка отправлена.'})
             form = FeedbackForm()
-            messages.success(request, u'Ваша заявка отправлена.')
-            return HttpResponseRedirect('/')
-    raise Http404() 
-    
+        c.update({'form': form})
+        return render_to_response('contacts.html', c, context_instance=RequestContext(request))
+        
+def clients(request):
+    c = get_common_context(request)
+    return render_to_response('clients.html', c, context_instance=RequestContext(request))
+
+def price(request):
+    c = get_common_context(request)
+    return render_to_response('clients.html', c, context_instance=RequestContext(request))

@@ -2,57 +2,60 @@
 
 {% block title %}Главная{% endblock %}
 
-{% block extended_head %}
-    <script type="text/javascript" language="javascript" src="/static/js/jquery.suSlider_main.js" ></script>
-    
-    <script type="text/javascript" language="javascript"  >
-            $(document).ready(function(){ 
-                $("#sildercontent_main").suSlider_main({
-                mode: "fade",
-                peed: 1000,
-                select:12000,
-                auto:true,
-                wrapper_class: "portfolio_main"
-                });
-            });
-        </script>
-
-{% endblock %}
-
 {% block content %}
-    <div class="left">
-        {% include 'left_forms.html' %}
-    </div><!-----left---->
-    
-    <div class="right">
-        
-            <div id="slider_main">
-                        <div id="sildercontent_main">
-                            {% for c in actions %}
-                                <div class="silderitem_main">
-                                    
-                                    <div  class="portfoliocontent_main" >
-                                        <a href='/actions/{{ c.slug }}/'><img src="/media/{{ c.image }}" alt="" /></a>
-                                    </div>
-                                    
-                                </div>
-                            {% endfor %}
-                        </div>
-                        <div id="sildernav_main">
-                            <ul id="slnav_main">
-                                {% for s in slideshow %}
-                                    <li class="slnav_main {% if forloop.first %}active{% endif %}"><span></span></li>
-                                {% endfor %}
-                            </ul> 
-                        </div>
-                        
-                    </div><!-----silder_main---->
-    </div><!-----right---->
-    
-    <div class="after">
-        {{ content|safe }}
-        
-        {% include 'slider.html' %}
+    <div class="site_navigation" style="height:40px; padding-left:20px;"></div>
+    <div id="content">
+        <div id="center">
+            <div class="block" style="height:270px;">
+                <h1>Универсальная клининговая компания "Классика-АГ" - клининговые услуги в Москве</h1>
+                <div class="separator"></div> 
+                <p style="text-align: justify;">
+                    <img width="173" height="153" style="margin-right: 15px; margin-bottom: 15px; float: left;" alt="" src="/static/images/icon_main22.gif" />
+                    В условиях современного ритма жизни порой нет времени на решение  проблемы чистоты и порядка в Ваших помещениях (зданиях, офисах и  квартирах). 
+                    ООО &laquo;Классика-АГ&raquo; поможет Вам в этом! Вам больше не придется  тратить время на самостоятельное решение вопроса уборки. Заключив с  
+                    нами договор, Вы избавите себя от многих проблем.
+                    <br /><br />
+                    Мы предлагаем&nbsp; Вам <strong>клининговые услуги в Москве</strong> и Московской области по доступным ценам.
+                </p>
+            </div>       
+            <div class="block_separator"><hr /></div>
+            
+            <div class="block" style="height:261px;">
+                <div class="galery m_p_c">
+                <div class="gal_item">
+                    <img src="/static/images/galery/photo7.jpg" alt="" width="200" height="200" />
+                    <img style="display:none;" src="/static/images/galery/photo8.jpg" alt="" width="200" height="200" />
+                    <img style="display:none;" src="/static/images/galery/photo9.jpg" alt="" width="200" height="200" />
+                </div>
                     
-    </div><!-----after---->
+                <div class="gal_item">
+                    <img src="/static/images/galery/photo1.jpg" alt="" width="200" height="200" />
+                    <img style="display:none;" src="/static/images/galery/photo5.jpg" alt="" width="200" height="200" />
+                    <img style="display:none;" src="/static/images/galery/photo2.jpg" alt="" width="200" height="200" />
+                </div>
+                    
+                <div class="gal_item">
+                    <img src="/static/images/galery/photo3.jpg" alt="" width="200" height="200" />
+                    <img style="display:none;" src="/static/images/galery/photo4.jpg" alt="" width="200" height="200" />
+                    <img style="display:none;" src="/static/images/galery/photo6.jpg" alt="" width="200" height="200" />
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="m_p_r">
+        <h2>Наши преимущества:</h2>
+        <ul class="mpr_ul">
+            <li>Индивидуальный подход</li>
+            <li>Высокое качество и оперативность</li>
+            <li>Квалифицированность сотрудников</li>
+            <li>Лучшая цена</li>
+            <li>Честность и порядочность</li>
+            <li>Мы работаем круглосуточно</li>
+        </ul>
+    </div>
+
+    <div class="banners">
+        <img src="/static/images/banner-classic-ag.gif" width="290" />
+    </div>
 {% endblock %}

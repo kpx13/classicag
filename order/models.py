@@ -13,7 +13,7 @@ from price.models import Item
 def sendmail(subject, body):
     mail_subject = ''.join(subject)
     send_mail(mail_subject, body, settings.DEFAULT_FROM_EMAIL,
-        settings.SEND_ALERT_EMAIL)
+        [settings.EMAIL_SEND_TO])
 
 
 class Order(models.Model):
@@ -39,7 +39,6 @@ class Order(models.Model):
     
     def save(self, *args, **kwargs):
         super(Order, self).save(*args, **kwargs)
-        OrderContent.move_from_cart(self.user, self)
         subject=u'Поступил новый заказ.',
         body_templ=u"""
 <u>Содержимое:</u>

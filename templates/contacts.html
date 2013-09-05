@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ p.title }}{% endblock %}
+
+{% block content %}
+    <div class="site_navigation" style="height:40px; padding-left:20px;">
+        <a href="/">Главная</a>&nbsp;/&nbsp;
+        {% if p.is_service %}
+            <a href="/cleaning_service/">Услуги</a>&nbsp;/&nbsp;
+            {{ p.title }}
+        {% else %}
+            {{ p.title }}
+        {% endif %}
+    </div>
+    
+    <div id="content_1">
+        <table width="978" cellpadding="0" cellspacing="0" border="0">
+            <tr>
+                <td valign="top">
+                    <div id="center">
+                        <h1>{{ p.title }}</h1>
+                        <div class="separator"></div>
+                        {{ p.content|safe }}
+                        
+                        <form method='POST'>
+                            <table style='text-align: left; vertical-align: bottom'>
+                                {{ form.as_table }}
+                                <tr><td></td><td><button type='submit'>Отправить!</button></td></tr>
+                            </table>
+                            {% csrf_token %}
+                            
+                            
+                        </form>
+                    </div>
+                    <div class="separator"></div>
+                    <div class="separator"></div>
+                </td>
+                
+                <td valign="top">
+                        <div class="c_p_r">
+                            <h2 style='color: red'>{{ message }}<h2>
+                            {{ p.content_right }}
+                        </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,28 @@
+/* CSS Document */
+
+.main_menu ul li{
+	margin:0.73em 0;
+}
+
+h1{line-height:20px;
+font-size:24px;}
+
+.m_p_r{
+	
+	margin-top:-581px;
+	padding:10px 20px;
+}
+
+.banners{
+	background-color:#202425;
+	
+	width:290px;
+	min-height:240px;
+	float:right;
+	margin-right:-290px;
+
+}
+
+#price_fixed {
+	float:none;
+}

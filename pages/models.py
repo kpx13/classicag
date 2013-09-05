@@ -9,6 +9,7 @@ class Page(models.Model):
     content = RichTextField(blank=True, verbose_name=u'контент')
     content_right = RichTextField(blank=True, verbose_name=u'контент в блоке справа')
     slug = models.SlugField(verbose_name=u'слаг', unique=True, blank=True, help_text=u'Заполнять не нужно')
+    is_service = models.BooleanField(verbose_name=u'Это услуга?', blank=True)
     
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -18,16 +19,18 @@ class Page(models.Model):
     @staticmethod
     def get_by_slug(page_name):
         try:
-            page = Page.objects.get(slug=page_name)
-            return {'title': page.title,
-                    'content': page.content,
-                    'content_right': page.content_right}
+            return Page.objects.get(slug=page_name)
         except:
             return None
+        
+    @staticmethod
+    def get_services_links():
+        return [(p.title, p.slug) for p in  Page.objects.filter(is_service=True)]
     
     class Meta:
         verbose_name = u'статическая страница'
         verbose_name_plural = u'статические страницы'
+        ordering=['title']
         
     def __unicode__(self):
         return self.slug

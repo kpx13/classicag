@@ -1,0 +1,19 @@
+/* CSS Document */
+
+#logo{
+	background-image:url(../images/ie_logo_bg.jpg);
+	background-position:center;
+	background-repeat:no-repeat;
+}
+
+.main_menu{
+	background-color:#3c4244;
+}
+
+#container{
+	background:url(../images/ie_grad.jpg) top repeat-y;
+}
+
+#footer{
+	background:url(../images/ie_footer.jpg) top repeat-y;
+}

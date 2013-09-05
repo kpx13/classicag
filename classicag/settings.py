@@ -113,8 +113,6 @@ INSTALLED_APPS = (
     'order',
     'pages',
     'price',
-    'services',
-    'slideshow',
 )
 
 

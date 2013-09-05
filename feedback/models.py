@@ -4,8 +4,8 @@ from pytils import dt
 
 class Request(models.Model):
     name  = models.CharField(u'контактное лицо *', max_length=255)
-    phone  = models.CharField(u'телефон *', max_length=255)
-    email  = models.CharField(u'e-mail *', max_length=255)
+    phone  = models.CharField(u'телефон', blank=True, max_length=255)
+    email  = models.CharField(u'e-mail', blank=True, max_length=255)
     msg = models.TextField(u'Сообщение *')
     request_date = models.DateTimeField(u'дата заявки', auto_now_add=True)
                     
