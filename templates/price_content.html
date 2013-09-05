@@ -1,15 +1,42 @@
-<ul>
-{% for cat in categories %}
-    <li>{{ cat.name }}</li>
-    <ul>
-        {% for subcat in cat.sub.all %}
-            <li>{{ subcat.name }}</li>
-            <ul>
-                {% for item in subcat.item.all %}
-                    <li>{{ item.name }} - {{ item.id }} - {{ item.price }}</li>
-                {% endfor %}
-            </ul>
-        {% endfor %}
-    </ul>
-{% endfor %}
-</ul>
+<script type="text/javascript" src="/static/js/ajax.js"></script>
+
+<div>
+    <form action="/order/" method="post" id='to_order'>
+        {% csrf_token %}
+        <table cellpadding="0" cellspacing="0" border="0" width="100%" >
+            {% for cat in categories %}
+            <tr>
+                <td width="650">
+                    <h2 class="button" style="text-align:center; margin-top:40px;">
+                        <a href="#" style="text-decoration:none" id="button_7" >{{ cat.name }}</a>
+                        <span class="content_separator button"></span>
+                    </h2>
+
+                    <div  style="display:none; width:550px; margin:0 auto;" class="dropdown">
+                        <div>
+                            {% for subcat in cat.sub.all %}
+                                <h3>{{ subcat.name }}</h3>
+                                <table cellpadding="5" cellspacing="0" width="100%" style="border:1px; border-color:#fff; border-style:solid; border-bottom:none;">
+                                    {% for item in subcat.item.all %}
+                                        <tr class="pr_tr">
+                                            <td title="$field.description}">{{ item.name }}</td>
+                                            <td width="40" align="center">
+                                                <input class="pr_input" maxlength="4" type="text" name="field_{{ item.id }}" id="price_field_{{ item.id }}" value = "0" oninput="price_total('{{ item.id }}')" autocomplete="off" /> 
+                                                <input type="hidden" value="{{ item.price }}" id="h_price_field_{{ item.id }}"/>
+                                                </td>
+                                            
+                                            <td width="70"> {{ item.unit }} </td>
+                                            <td width="90"> {{ item.price }} руб. </td>
+                                        </tr> 
+                                    {% endfor %}
+                                
+                                </table>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+</div>

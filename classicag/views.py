@@ -90,3 +90,11 @@ def price_parse(request):
                          price=int(tr.findAll('td')[1].findAll('input')[1]['value']))
                 i.save()
     return HttpResponseRedirect('/price/')
+
+def order(request):
+    c = get_common_context(request)
+    if request.method == 'POST':
+        for k, v in request.POST.iteritems():
+            if k.startswith('field_') and int(v) > 0:
+                print k, v
+    return HttpResponseRedirect('/price/')
