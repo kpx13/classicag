@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Главная{% endblock %}
+
+{% block extended_head %}
+    <script type="text/javascript" language="javascript" src="/static/js/jquery.suSlider_main.js" ></script>
+    
+    <script type="text/javascript" language="javascript"  >
+            $(document).ready(function(){ 
+                $("#sildercontent_main").suSlider_main({
+                mode: "fade",
+                peed: 1000,
+                select:12000,
+                auto:true,
+                wrapper_class: "portfolio_main"
+                });
+            });
+        </script>
+
+{% endblock %}
+
+{% block content %}
+    <div class="left">
+        {% include 'left_forms.html' %}
+    </div><!-----left---->
+    
+    <div class="right">
+        
+            <div id="slider_main">
+                        <div id="sildercontent_main">
+                            {% for c in actions %}
+                                <div class="silderitem_main">
+                                    
+                                    <div  class="portfoliocontent_main" >
+                                        <a href='/actions/{{ c.slug }}/'><img src="/media/{{ c.image }}" alt="" /></a>
+                                    </div>
+                                    
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div id="sildernav_main">
+                            <ul id="slnav_main">
+                                {% for s in slideshow %}
+                                    <li class="slnav_main {% if forloop.first %}active{% endif %}"><span></span></li>
+                                {% endfor %}
+                            </ul> 
+                        </div>
+                        
+                    </div><!-----silder_main---->
+    </div><!-----right---->
+    
+    <div class="after">
+        {{ content|safe }}
+        
+        {% include 'slider.html' %}
+                    
+    </div><!-----after---->
+{% endblock %}

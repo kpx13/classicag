@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>{% block title %}Главная{% endblock %}</title>
+        <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+        <script type="text/javascript" language="javascript" src="/static/js/jquery-latest.pack.js" ></script>
+        <script type="text/javascript" language="javascript" src="/static/js/jquery.suSlider.js" ></script>
+        <script type="text/javascript" language="javascript" src="/static/js/jquery.leanModal.min.js" ></script>
+        <script type="text/javascript">
+            $(function() {
+                $('a[rel*=leanModal]').leanModal({ top : 100, closeButton: ".modal_close" });       
+            });
+        </script>
+        <script type="text/javascript" language="javascript"  >
+            $(document).ready(function(){ 
+                $("#sildercontent").suSlider({
+                    mode: "fade",
+                    speed: 1000,
+                    select:12000,
+                    auto:true,
+                });
+                
+                {% if request_form_open %}
+                    $('#go').click();
+                {% endif %}
+            });
+        </script>
+        {% block extended_head %}
+        {% endblock %}
+    </head>
+    <body>
+        <div id="wrapper">
+            <div class="header">
+                <a class="logo" href="/"><img src="/static/images/logo.png" alt="Авангард Техцентр" /></a>
+                    <div class="zap">
+                        <span>Запишись на техосмотр</span>
+                        <br />
+                        <a href='/services/tehnicheskoe-obsluzhivanie/' ><button class="more">Подробнее...</button></a>
+                    </div> 
+                <div class="contact">
+                    <span class="address">г. Москва, ул. Миклухо-маклая, 15/3.</span>
+                    <div class="phone">
+                        8 (495) 434-00-30
+                        <br />
+                        8 (965) 197-67-67
+                    </div>
+                </div> 
+            </div> <!-----header---->
+           
+            <div class="main_menu">
+                <ul>
+                    <li {% if 'home' in request_url %} class="current" {% endif %}>
+                        <a href="/">Главная</a>
+                    </li>
+                    <li {% if 'services' in request_url %} class="current" {% endif %}>
+                        <a href="/services/">Услуги</a>
+                    </li>
+                    <li {% if 'korporativnyim' in request_url %} class="current" {% endif %}>
+                        <a href="/korporativnyim-klientam/">Корпоративным клиентам</a>
+                    </li>
+                    <li {% if 'actions' in request_url %} class="current" {% endif %}>
+                        <a href="/actions/">Акции</a>
+                    </li>
+                    <li {% if 'articles' in request_url %} class="current" {% endif %}>
+                        <a href="/articles/">Статьи</a>
+                    </li>
+                    <li {% if 'blog' in request_url %} class="current" {% endif %}>
+                        <a href="/blog/">Блог</a>
+                    </li>
+                    <li {% if 'about' in request_url %} class="current" {% endif %}>
+                        <a href="/about/">О нас</a>
+                    </li>
+                    <li {% if 'kontaktyi' in request_url %} class="current" {% endif %}>
+                        <a href="/kontaktyi/">Контакты</a>
+                    </li>
+                </ul>
+            </div><!-----main_menu---->
+           
+            <div class="content">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class='message-wrapper'>
+                        <div class="alert alert-{{ message.tags }}">
+                            {{ message|safe }}
+                        </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                    
+                {% block content %}
+                {% endblock %}
+            </div><!-----content---->
+           
+            <div class="footer">
+                <span>АВАНГАРД 2013 © Все права защищены</span>
+            </div>
+           
+            
+            <div id="lean_overlay"></div>
+           
+        </div><!-----wrapper---->
+    </body>
+</html>
