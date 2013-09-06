@@ -15,11 +15,13 @@ from order.models import Order, OrderContent
 
 import config
 from livesettings import config_value
+from django.conf import settings
 
 
 def get_common_context(request):
     c = {}
     c['request_url'] = request.path
+    c['is_debug'] = settings.DEBUG
     c.update(csrf(request))
     return c
 
