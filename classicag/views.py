@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from django.core.context_processors import csrf
-from django.contrib import messages
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -10,6 +9,8 @@ from django.template import RequestContext
 from pages.models import Page
 from price.models import Category, SubCategory, Item
 from feedback.forms import FeedbackForm
+from order.forms import OrderForm
+from order.models import Order, OrderContent
 
 
 import config
@@ -48,7 +49,6 @@ def contacts(request):
         form = FeedbackForm(request.POST)
         if form.is_valid():
             form.save()
-            c.update({'message': u'Ваша заявка отправлена.'})
             form = FeedbackForm()
         c.update({'form': form})
         return render_to_response('contacts.html', c, context_instance=RequestContext(request))
@@ -94,7 +94,34 @@ def price_parse(request):
 def order(request):
     c = get_common_context(request)
     if request.method == 'POST':
-        for k, v in request.POST.iteritems():
-            if k.startswith('field_') and int(v) > 0:
-                print k, v
-    return HttpResponseRedirect('/price/')
+        if 'step' in request.POST:
+            step = int(request.POST['step'])
+            res = []
+            sum_price = 0
+            for k, v in request.POST.iteritems():
+                if k.startswith('field_') and int(v) > 0:
+                    item=Item.get(int(k[6:]))
+                    count = int(v)
+                    res.append((item, count))
+                    sum_price += item.price * count
+            c['sum_price'] = sum_price
+            c['order_content'] = res
+            if step == 1:
+                c['form'] = OrderForm()
+                return render_to_response('order.html', c, context_instance=RequestContext(request))
+            elif step == 2:
+                form = OrderForm(request.POST)
+                if form.is_valid():
+                    ord = form.save()
+                    print ord
+                    for item, count in res:
+                        OrderContent(order=ord, item=item, count=count).save()
+                    ord.send_email()
+                    return render_to_response('order_ok.html', c, context_instance=RequestContext(request))
+                else:
+                    c['form'] = form 
+                    return render_to_response('order.html', c, context_instance=RequestContext(request))
+        else:
+            raise Http404()
+    else:
+        raise Http404()

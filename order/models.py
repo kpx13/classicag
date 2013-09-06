@@ -18,8 +18,8 @@ def sendmail(subject, body):
 
 class Order(models.Model):
     name  = models.CharField(u'контактное лицо *', max_length=255)
-    phone  = models.CharField(u'телефон *', max_length=255)
-    email  = models.CharField(u'e-mail *', max_length=255)
+    phone  = models.CharField(u'телефон', blank=True, max_length=255)
+    email  = models.CharField(u'e-mail', blank=True, max_length=255)
     date = models.DateTimeField(default=datetime.datetime.now, verbose_name=u'дата заказа')
     comment = models.TextField(blank=True, verbose_name=u'комментарий')
     
@@ -37,20 +37,23 @@ class Order(models.Model):
     def get_sum(self):
         return sum([x.count * x.item.price for x in OrderContent.get_content(self)])
     
-    def save(self, *args, **kwargs):
-        super(Order, self).save(*args, **kwargs)
+    def send_email(self):
         subject=u'Поступил новый заказ.',
         body_templ=u"""
-<u>Содержимое:</u>
+Контактное лицо: {{ o.name }}
+Телефон: {{ o.phone }}
+E-mail: {{ o.email }}
+Сообщение: {{ o.comment }}
+
+Содержимое:
     {% for c in o.content.all %}
         Название: {{ c.item.name }} 
-        Кол-во ед.: {{ c.count }}
+        Кол-во: {{ c.count }} {{ c.item.unit }} 
         Цена: {{ c.item.price }} руб.
+        
     {% endfor %}
-<hr />
-<u>Всего позиций:</u> {{ o.get_count }} шт.
-<u>Общая стоимость:</u>  {{ o.get_sum }} руб. 
-<u>Сообщение:</u> {{ o.comment }}
+
+Общая стоимость:  {{ o.get_sum }} руб. 
 """
         body = Template(body_templ).render(Context({'o': self}))
         sendmail(subject, body)    

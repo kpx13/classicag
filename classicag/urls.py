@@ -25,7 +25,7 @@ urlpatterns = patterns('',
     url(r'^clients/$', views.clients),
     url(r'^price/$', views.price),
     url(r'^order/$', views.order),
-    url(r'^price_parse/$', views.price_parse),
+    #url(r'^price_parse/$', views.price_parse),
     
     url(r'^(?P<page_name>[\w-]+)/$' , views.page),
 )
