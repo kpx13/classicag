@@ -76,7 +76,7 @@ class CustomIndexDashboard(Dashboard):
             modules.ModelList(
                 title = u'Обратная связь',
                 models=(
-                    'feedback.models.Feedback',
+                    'feedback.models.Request',
                 ),
             )
         )
