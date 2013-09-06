@@ -30,7 +30,7 @@
             <tr>
                 <td width="650">
                     <h2 class="button" style="text-align:center; margin-top:40px;">
-                        <a href="#" style="text-decoration:none" id="button_7" >{{ cat.name }}</a>
+                        <a href="#" style="text-decoration:none" onclick='update_panel(this)'>{{ cat.name }}</a>
                         <span class="content_separator button"></span>
                     </h2>
 
@@ -51,7 +51,6 @@
                                             <td width="90"> {{ item.price }} руб. </td>
                                         </tr> 
                                     {% endfor %}
-                                
                                 </table>
                             {% endfor %}
                         </div>
@@ -71,7 +70,7 @@
                 
                 <td valign="top">
                     
-                    <div id="price_fixed" style="text-align:center">
+                    <div id="price_fixed" style="text-align:center; position: fixed; bottom: 10px;">
                         <div class="cart" style="font-size:24px; text-align:center; line-height:35px;">
                             <span class="europe">Стоимость услуг</span><br/>
                             <font size="+3" ><font color="#45403a" id="summ">0</font></font><br />
@@ -91,4 +90,13 @@
             </tr>
         </table>
     </div>
+    
+<script>
+    $(document).ready()
+    {
+        console.log('***');
+        var rect = document.getElementById("main_menu").getBoundingClientRect().left + 15;
+        document.getElementById("price_fixed").style.left= rect  + 'px';
+    };
+</script>
 {% endblock %}

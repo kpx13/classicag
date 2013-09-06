@@ -10,7 +10,7 @@ class Category(models.Model):
     class Meta:
         verbose_name = 'категория'
         verbose_name_plural = 'категории'
-        ordering=['name']
+        ordering=['id']
     
     def __unicode__(self):
         return self.name
@@ -30,7 +30,7 @@ class SubCategory(models.Model):
     class Meta:
         verbose_name = 'подкатегория'
         verbose_name_plural = 'подкатегории'
-        ordering=['name']
+        ordering=['id']
     
     def __unicode__(self):
         return self.name
