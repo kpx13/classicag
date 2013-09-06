@@ -43,86 +43,44 @@ class CustomIndexDashboard(Dashboard):
         
         self.children.append(
             modules.ModelList(
-                title = u'Страницы. Текстовая инфа',
+                title = u'Страницы.',
                 models=(
                     'pages.models.Page',
                 ),
             )
         )
         
+        
         self.children.append(
             modules.ModelList(
-                title = u'Страницы в О нас',
+                title = u'Прайс',
                 models=(
-                    'about.models.Article',
+                    'price.models.Category',
+                    'price.models.SubCategory',
+                    'price.models.Item',
+                ),
+            )
+        )
+        
+        
+        self.children.append(
+            modules.ModelList(
+                title = u'Заказы',
+                models=(
+                    'order.models.Order',
                 ),
             )
         )
         
         self.children.append(
             modules.ModelList(
-                title = u'Акции',
+                title = u'Обратная связь',
                 models=(
-                    'action.models.Action',
+                    'feedback.models.Feedback',
                 ),
             )
         )
         
-        self.children.append(
-            modules.ModelList(
-                title = u'Статьи',
-                models=(
-                    'articles.models.Article',
-                ),
-            )
-        )
-        
-        self.children.append(
-            modules.ModelList(
-                title = u'Блог',
-                models=(
-                    'blog.models.Article',
-                ),
-            )
-        )
-        
-        self.children.append(
-            modules.ModelList(
-                title = u'Услуги',
-                models=(
-                    'services.models.Article',
-                ),
-            )
-        )
-
-        
-        self.children.append(
-            modules.ModelList(
-                title = u'Заявки',
-                models=(
-                    'request.models.Request',
-                ),
-            )
-        )
-
-        
-        self.children.append(
-            modules.ModelList(
-                title = u'Подписки',
-                models=(
-                    'subscribe.models.Subscribe',
-                ),
-            )
-        )
-        
-        self.children.append(
-            modules.ModelList(
-                title = u'Слайдшоу',
-                models=(
-                    'slideshow.models.Slider',
-                ),
-            )
-        )
         # append a recent actions module
         self.children.append(modules.RecentActions(_('Recent Actions'), 5))
 
