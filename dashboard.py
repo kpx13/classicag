@@ -43,7 +43,7 @@ class CustomIndexDashboard(Dashboard):
         
         self.children.append(
             modules.ModelList(
-                title = u'Страницы.',
+                title = u'Страницы',
                 models=(
                     'pages.models.Page',
                 ),

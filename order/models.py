@@ -6,14 +6,14 @@ import datetime
 from django.conf import settings
 from django.core.mail import send_mail
 from django.template import Context, Template
-
+from livesettings import config_value
 from price.models import Item
 
 
 def sendmail(subject, body):
     mail_subject = ''.join(subject)
     send_mail(mail_subject, body, settings.DEFAULT_FROM_EMAIL,
-        [settings.EMAIL_SEND_TO])
+        [config_value('MyApp', 'EMAIL')])
 
 
 class Order(models.Model):

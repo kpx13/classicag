@@ -58,7 +58,7 @@ class Item(models.Model):
     class Meta:
         verbose_name = u'услуга'
         verbose_name_plural = u'услуги'
-        ordering=['name']
+        ordering=['id']
         
     def __unicode__(self):
         return self.name
