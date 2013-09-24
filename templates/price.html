@@ -34,7 +34,7 @@
                         <span class="content_separator button"></span>
                     </h2>
 
-                    <div  style="display:none; width:550px; margin:0 auto;" class="dropdown">
+                    <div  style="{% if selected_cat != cat.id %}display:none;{% endif %} width:550px; margin:0 auto;" class="dropdown" id='cat_{{ cat.id }}'>
                         <div>
                             {% for subcat in cat.sub.all %}
                                 <h3>{{ subcat.name }}</h3>

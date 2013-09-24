@@ -59,9 +59,10 @@ def clients(request):
     c = get_common_context(request)
     return render_to_response('clients.html', c, context_instance=RequestContext(request))
 
-def price(request):
+def price(request, category):
     c = get_common_context(request)
-    c['categories'] = Category.objects.all()            
+    c['categories'] = Category.objects.all()
+    c['selected_cat'] = int(category)          
     return render_to_response('price.html', c, context_instance=RequestContext(request))
 
 def price_parse(request):

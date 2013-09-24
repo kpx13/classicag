@@ -10,6 +10,7 @@ class Page(models.Model):
     content_right = RichTextField(blank=True, verbose_name=u'контент в блоке справа')
     slug = models.SlugField(verbose_name=u'слаг', unique=True, blank=True, help_text=u'Заполнять не нужно')
     is_service = models.BooleanField(verbose_name=u'Это услуга?', blank=True)
+    price_category = models.ForeignKey('price.Category', verbose_name=u'категория в прайсе', blank=True, null=True)
     
     def save(self, *args, **kwargs):
         if not self.slug:
