@@ -15,7 +15,7 @@
     
     <div id="content_1">
         {% if p.price_category %}
-           <div id="price_fixed" style="text-align:center; position: fixed; bottom: 0px; margin-left: -53px; width:10px; height: 70px; padding-right: -20px; background-color: #4a4e4f">
+           <div id="price_fixed" style="text-align:center; position: fixed; top: 418px; margin-left: -53px; width:10px; height: 70px; padding-right: -20px; background-color: #4a4e4f">
                 <a href='/price/{{ p.price_category.id }}/' style='text-decoration: none; font-size: 24px;'>Ц<br />Е<br />Н<br />Ы</a>
             </div>
         {% endif %}
@@ -23,7 +23,7 @@
             <tr>
                 <td valign="top">
                     <div id="center">
-                        <h1>{{ p.title }}</h1>
+                        <h1 style='max-width: 500px'>{{ p.title }}</h1>
                         <div class="separator"></div>
                         {{ p.content|safe }}
                         
