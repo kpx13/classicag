@@ -421,7 +421,8 @@ ul#main_menu_nav li a:hover, #current a{
 
 	float:right;
 
-	margin-top:-588px;
+	margin-top:0px;
+	margin-right: 20px;
 
 	padding:10px 20px;
 

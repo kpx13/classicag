@@ -42,7 +42,7 @@
                         </div>
                     {% else %}
                         <div class="c_p_r">
-                            {{ p.content_right }}
+                            {{ p.content_right|safe }}
                         </div>
                     {% endif %}
                 </td>

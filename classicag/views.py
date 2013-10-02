@@ -39,6 +39,7 @@ def page(request, page_name):
 def home(request):
     c = get_common_context(request)
     c['request_url'] = 'home'
+    c['p'] = Page.get_by_slug('home')
     return render_to_response('home.html', c, context_instance=RequestContext(request))
 
 def contacts(request):
