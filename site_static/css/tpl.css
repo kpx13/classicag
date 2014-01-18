@@ -870,11 +870,3 @@ input, textarea{
     margin:0;
     font-stretch:expanded;
 }
-
-.elochka {
-    position: fixed;
-    left: -10px;
-    bottom: 0px;
-    z-index: 100;
-    width: 250px;
-}
